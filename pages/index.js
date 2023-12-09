@@ -1,71 +1,34 @@
-import { useCallback, useEffect, useState } from 'react'
-import Button from '../components/Button'
-import ClickCount from '../components/ClickCount'
-import styles from '../styles/home.module.css'
+import Head from "next/head";
+import { BiUserPlus } from "react-icons-bi";
+import Table from "./components/table"
+import Form from "./components/form"
 
-function throwError() {
-  console.log(
-    // The function body() is not defined
-    document.body()
-  )
-}
 
-function Home() {
-  const [count, setCount] = useState(0)
-  const increment = useCallback(() => {
-    setCount((v) => v + 1)
-  }, [setCount])
-
-  useEffect(() => {
-    const r = setInterval(() => {
-      increment()
-    }, 1000)
-
-    return () => {
-      clearInterval(r)
-    }
-  }, [increment])
-
+export default function Home() {
   return (
-    <main className={styles.main}>
-      <h1>Fast Refresh Demo</h1>
-      <p>
-        Fast Refresh is a Next.js feature that gives you instantaneous feedback
-        on edits made to your React components, without ever losing component
-        state.
-      </p>
-      <hr className={styles.hr} />
-      <div>
-        <p>
-          Auto incrementing value. The counter won't reset after edits or if
-          there are errors.
-        </p>
-        <p>Current value: {count}</p>
-      </div>
-      <hr className={styles.hr} />
-      <div>
-        <p>Component with state.</p>
-        <ClickCount />
-      </div>
-      <hr className={styles.hr} />
-      <div>
-        <p>
-          The button below will throw 2 errors. You'll see the error overlay to
-          let you know about the errors but it won't break the page or reset
-          your state.
-        </p>
-        <Button
-          onClick={(e) => {
-            setTimeout(() => document.parentNode(), 0)
-            throwError()
-          }}
-        >
-          Throw an Error
-        </Button>
-      </div>
-      <hr className={styles.hr} />
-    </main>
+    <section>
+
+      <main className='py-5'>
+        <h1 className='text xl md:text-5xl text-center font-bold py-10'>Events</h1>
+
+        <div className="container mx-auto flex justify-between py-5 border-b">
+
+          <div className="left flex gap-3">
+            <button className='flex bg-indigo-500 text-white px-4 py-2 border rounded-md'>
+              Add Employee
+            </button>
+          </div>
+
+        </div>
+        <div className="container mx-auto py-5">
+        <Form></Form>
+        </div>
+
+        <div className="container mx-auto">
+        <Table></Table>  
+        </div>
+        
+      </main>
+    </section>
   )
 }
-
-export default Home
